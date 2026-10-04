@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["ZQAQ3WBUM6.se.sverigesforetagare.handslag"],
+        "components": [
+          { "/": "/traff/*", "comment": "Delade träffar öppnas i Handslag" }
+        ]
+      }
+    ]
+  }
+}
