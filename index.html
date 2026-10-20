@@ -8,20 +8,49 @@
 <meta property="og:title" content="Du är inbjuden till en träff i Handslag">
 <meta property="og:description" content="Ladda ner Handslag för att se träffen och anmäla dig.">
 <script>
-/* Har man appen öppnas länken direkt i Handslag och den här sidan
-   visas aldrig. Annars: vidare till Handslag i App Store. */
-var MAL = "https://apps.apple.com/se/app/handslag/id6807427534";
-window.location.replace(MAL);
+/* Har man appen oppnas lanken direkt i Handslag och sidan visas aldrig.
+   Annars: iPhone till App Store, Android till Google Play, dator stannar
+   pa sidan med bada knapparna.
+   PLAY_UTE: satt till true den dag appen finns pa Google Play. Fram till
+   dess far Android-telefoner stanna pa sidan med beskedet att den kommer. */
+var APP_STORE = "https://apps.apple.com/se/app/handslag/id6807427534";
+var GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=se.sverigesforetagare.handslag";
+var PLAY_UTE = false;
+var ua = navigator.userAgent || "";
+var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+var android = /Android/i.test(ua);
+if (ios) window.location.replace(APP_STORE);
+else if (android && PLAY_UTE) window.location.replace(GOOGLE_PLAY);
+document.addEventListener("DOMContentLoaded", function () {
+  var p = document.getElementById("play"), s = document.getElementById("snart");
+  if (PLAY_UTE) { p.style.display = "inline-block"; s.style.display = "none"; }
+  if (ios || (android && PLAY_UTE)) document.getElementById("vidare").style.display = "block";
+});
 </script>
 <style>
 body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#fff;text-align:center;
+font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#fff;text-align:center;
 background:linear-gradient(135deg,#F9CE34,#EE2A7B 52%,#6228D7);padding:24px;box-sizing:border-box}
-a{color:#fff;font-weight:800}
-h1{font-size:30px;margin:0 0 10px}
+.kort{max-width:360px}
+h1{font-size:32px;margin:0 0 10px;letter-spacing:-.02em}
+p{font-size:17px;line-height:1.5;margin:0 0 22px;opacity:.95}
+.knappar a{display:inline-block;background:#fff;color:#6228D7;font-weight:800;text-decoration:none;
+padding:14px 22px;border-radius:14px;margin:0 4px 10px}
+#play{display:none}
+#vidare{display:none;margin-bottom:18px;opacity:.9}
+small{display:block;margin-top:12px;opacity:.85;font-size:14px}
 </style>
 </head>
 <body>
-<div><h1>Handslag</h1><p>Du skickas vidare till App Store&hellip; <br><br><a href="https://apps.apple.com/se/app/handslag/id6807427534">Ladda ner Handslag</a></p></div>
+<div class="kort">
+  <h1>Handslag</h1>
+  <p>Ladda ner Handslag för att öppna länken och anmäla dig.</p>
+  <div id="vidare">Du skickas vidare&hellip;</div>
+  <div class="knappar">
+    <a href="https://apps.apple.com/se/app/handslag/id6807427534">App Store</a>
+    <a id="play" href="https://play.google.com/store/apps/details?id=se.sverigesforetagare.handslag">Google Play</a>
+  </div>
+  <small><span id="snart">Android-versionen kommer snart till Google Play.<br></span>En plattform av Nätverket Sveriges Företagare.</small>
+</div>
 </body>
 </html>
