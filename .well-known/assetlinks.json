@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "se.sverigesforetagare.handslag",
+      "sha256_cert_fingerprints": [
+        "67:EF:2F:5D:8C:DF:C3:EC:C4:36:35:75:D7:94:E9:91:44:2F:FB:B0:97:AA:58:BF:6F:53:3B:C7:85:F2:F6:7B"
+      ]
+    }
+  }
+]
